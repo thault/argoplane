@@ -1,0 +1,25 @@
+apiVersion: sqs.aws.crossplane.io/v1beta1
+kind: Queue
+metadata:
+  name: queue1
+spec:
+  forProvider:
+    redrivePolicy:
+      deadLetterTargetArnRef:
+        name: queue2
+      maxReceiveCount: 1
+    region: us-east-1
+  providerConfigRef:
+    name: example-queue-1
+
+---
+
+apiVersion: sqs.aws.crossplane.io/v1beta1
+kind: Queue
+metadata:  
+  name: queue2
+spec:
+  forProvider:     
+    region: us-east-1    
+  providerConfigRef:     
+    name: example-queue-2
