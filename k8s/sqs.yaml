@@ -1,4 +1,4 @@
-apiVersion: sqs.aws.crossplane.io/v1beta1
+apiVersion: sqs.aws.crossplane.io/v1.17.0
 kind: Queue
 metadata:
   name: queue1
@@ -14,7 +14,7 @@ spec:
 
 ---
 
-apiVersion: sqs.aws.crossplane.io/v1beta1
+apiVersion: sqs.aws.crossplane.io/v1.17.0
 kind: Queue
 metadata:  
   name: queue2
