@@ -9,6 +9,7 @@ spec:
   forProvider:
     name: tha-example-sqs-1
     receiveWaitTimeSeconds: 10
+    delaySeconds: 0
     region: us-east-1
     redrivePolicy: >-
       ${jsonencode({
