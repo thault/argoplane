@@ -28,6 +28,11 @@ spec:
   forProvider:
     name: tha-example-sqs-1-dlq
     receiveWaitTimeSeconds: 10
+    redriveAllowPolicy: >-
+      ${jsonencode({
+          redrivePermission = "byQueue",
+          sourceQueueArns   = ["arn:aws:sqs:us-east-1:625827655152:tha-example-sqs-1"]
+        })}
     region: us-east-1
     tags:
       Environment: production
