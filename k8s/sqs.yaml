@@ -3,6 +3,7 @@ kind: Queue
 metadata:
   labels:
     #testing.upbound.io/example-name: example
+    application.queue: example-app
   name: tha-example-1
 spec:
   forProvider:
@@ -36,3 +37,37 @@ spec:
     region: us-east-1
     tags:
       Environment: production
+---
+
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    application.sns: example-app
+    #meta.upbound.io/example-id: sns/v1beta1/topicsubscription
+  labels:
+    testing.upbound.io/example-name: sns
+  name: tha-example-sns-1
+spec:
+  forProvider:
+    region: us-east-1
+---
+
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: TopicSubscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sns/v1beta1/topicsubscription
+  labels:
+    testing.upbound.io/example-name: sns
+  name: example
+spec:
+  forProvider:
+    endpointSelector:
+      matchLabels:
+        application.queue: example-app
+    protocol: sqs
+    region: us-east-1
+    topicArnSelector:
+      matchLabels:
+        application.sns: example-app
