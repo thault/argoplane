@@ -1,25 +1,16 @@
-apiVersion: sqs.aws.crossplane.io/v1.17.0
+apiVersion: sqs.aws.upbound.io/v1beta1
 kind: Queue
 metadata:
-  name: queue1
+  labels:
+    #testing.upbound.io/example-name: example
+  name: tha-example-1
 spec:
   forProvider:
-    redrivePolicy:
-      deadLetterTargetArnRef:
-        name: queue2
-      maxReceiveCount: 1
+    delaySeconds: 90
+    maxMessageSize: 2048
+    messageRetentionSeconds: 86400
+    name: tha-example-sqs-1
+    receiveWaitTimeSeconds: 10
     region: us-east-1
-  providerConfigRef:
-    name: example-queue-1
-
----
-
-apiVersion: sqs.aws.crossplane.io/v1.17.0
-kind: Queue
-metadata:  
-  name: queue2
-spec:
-  forProvider:     
-    region: us-east-1    
-  providerConfigRef:     
-    name: example-queue-2
+    tags:
+      Environment: production
