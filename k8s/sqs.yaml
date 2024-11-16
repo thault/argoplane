@@ -9,10 +9,10 @@ spec:
     name: tha-example-sqs-1
     receiveWaitTimeSeconds: 10
     region: us-east-1
-    redriveAllowPolicy: >-
+    redrivePolicy: >-
       ${jsonencode({
-          redrivePermission = "byQueue",
-          sourceQueueArns   = ["arn:aws:sqs:us-east-1:153891904029:tha-example-sqs-1-dlq"]
+          deadLetterTargetArn = "arn:aws:sqs:us-east-1:153891904029:tha-example-sqs-1-dlq"
+          maxReceiveCount     = 4
         })}
     tags:
       Environment: production
